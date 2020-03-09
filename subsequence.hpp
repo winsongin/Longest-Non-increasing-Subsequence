@@ -55,7 +55,12 @@ sequence random_sequence(size_t size, unsigned seed, int max_element) {
 bool is_nonincreasing(const sequence& A) {
   //TO DO: Write code for this function, including rewriting the return
   // statement, and then delete these comments.
-  return false;
+    for(int i = 0; i < (A.size()-2); i++){
+      if(A.at(i+1) > A.at(i)){
+        return false;
+      }
+    }
+    return true;
   }
 
 sequence longest_nonincreasing_end_to_beginning(const sequence& A) {
@@ -72,6 +77,9 @@ sequence longest_nonincreasing_end_to_beginning(const sequence& A) {
     for (size_t j = i+1; j < n ; j++) {
       // TODO: write the statements that compute the value of
       // H[i] based on conditions that involve A[i], A[j] and H[j]
+      if(A.at(i) >= A.at(j) && H.at(i) <= H.at(j)){
+        H.at(i) = H.at(j)+1;
+      }
     }
   }
   
@@ -92,6 +100,9 @@ sequence longest_nonincreasing_end_to_beginning(const sequence& A) {
       // TODO: write the statements to add A[i] to the
       // sequence R by storing it into R[j], decrement
       // index and increment j
+      R.at(j) = (A.at(i));
+      index--;
+      j++;
     }
   }
   
@@ -126,6 +137,7 @@ sequence longest_nonincreasing_powerset(const sequence& A) {
     // larger than the size of the current best if both 
     // conditions are satisfied, then stored candidate 
     // in best
+    if(is_nonincreasing(candidate) == true && )
   }
   return best;
 }
