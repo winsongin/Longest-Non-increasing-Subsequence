@@ -53,10 +53,9 @@ sequence random_sequence(size_t size, unsigned seed, int max_element) {
 }
 
 bool is_nonincreasing(const sequence& A) {
-  //TO DO: Write code for this function, including rewriting the return
-  // statement, and then delete these comments.
-    for(int i = 0; i < (A.size()-2); i++){
-      if(A.at(i+1) > A.at(i)){
+    // if the next value is less than or equal to the current value for the whole vector, it is non-increasing
+    for(int i = 0; i < (A.size()-1); i++){
+      if(A.at(i+1) > A.at(i)){ // if there is one case that the next value is greater than the current one, return false
         return false;
       }
     }
@@ -75,10 +74,10 @@ sequence longest_nonincreasing_end_to_beginning(const sequence& A) {
   // the loop condition is i >= 0
   for (signed int i = n-2;  i>= 0; i--) {
     for (size_t j = i+1; j < n ; j++) {
-      // TODO: write the statements that compute the value of
-      // H[i] based on conditions that involve A[i], A[j] and H[j]
+      // checks the current value of A with all of the values that come before that index 
+      // also checks the current value of H with all of the values that come before that index 
       if(A.at(i) >= A.at(j) && H.at(i) <= H.at(j)){
-        H.at(i) = H.at(j)+1;
+        H.at(i) = H.at(j)+1; // add 1 to the current index's value 
       }
     }
   }
@@ -96,12 +95,9 @@ sequence longest_nonincreasing_end_to_beginning(const sequence& A) {
   
   size_t index = max-1, j = 0;
   for (size_t i = 0; i < n; ++i) {
-    if (H[i] == index) {
-      // TODO: write the statements to add A[i] to the
-      // sequence R by storing it into R[j], decrement
-      // index and increment j
-      R.at(j) = (A.at(i));
-      index--;
+    if (H[i] == index) { 
+      R.at(j) = (A.at(i)); // assign that specific value from vector A to vector R
+      index--; // decreasing index from max to 0 
       j++;
     }
   }
@@ -129,15 +125,14 @@ sequence longest_nonincreasing_powerset(const sequence& A) {
     }
     
     sequence candidate;
+    // generate the candidate
     for (size_t i = 1; i <= k; ++i) {
       candidate.push_back(A[stack[i]-1]);
     }
-    // TODO: write the if statement to test whether candidate
-    // determines a non-increasing sequence AND has a size
-    // larger than the size of the current best if both 
-    // conditions are satisfied, then stored candidate 
-    // in best
-    if(is_nonincreasing(candidate) == true && )
+
+    if(is_nonincreasing(candidate) && candidate.size() > best.size()){
+      best = candidate; // assign candidate to best if the candidate is nonincreasing and the candidate's size is bigger than the best's size
+    }
   }
   return best;
 }
